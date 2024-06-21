@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import Todoitem from "./Todoitem";
 
 const Todo = () => {
   const [todo, setTodo] = useState("");
@@ -7,7 +8,6 @@ const Todo = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log("clicked");
     setTodos([...todos, todo]);
     setTodo("");
   };
@@ -22,7 +22,9 @@ const Todo = () => {
         />
         <button type="submit">Add</button>
       </form>
-      {console.log(todos)}
+      {todos.map((item, index) => (
+        <Todoitem item={item} key={index} />
+      ))}
     </>
   );
 };
