@@ -1,12 +1,24 @@
 import React, { useState } from "react";
+import { v4 as uuidv4 } from "uuid";
 
 const Form = ({ todos, setTodos }) => {
-  const [todo, setTodo] = useState({ taskName: "", priority: "", done: false });
+  const [todo, setTodo] = useState({
+    taskName: "",
+    priority: "1",
+    done: false,
+    id: uuidv4(),
+  });
 
   const handleSubmit = (e) => {
     e.preventDefault();
     setTodos([...todos, todo]);
-    setTodo({ taskName: "", done: false });
+    setTodo({
+      taskName: "",
+      priority: "1",
+      taskNumber: "",
+      done: false,
+      id: uuidv4(),
+    });
   };
   return (
     <div className="container py-5">
@@ -24,39 +36,18 @@ const Form = ({ todos, setTodos }) => {
               aria-label="Add Your Task Here..."
               aria-describedby="button-addon2"
             />
-            <button
-              className="btn btn-outline-secondary dropdown-toggle"
-              type="button"
-              data-bs-toggle="dropdown"
-              aria-expanded="false"
+            <select
+              className="form-select"
+              aria-label="Default select example"
+              value={todo.priority}
+              onChange={(e) => setTodo({ ...todo, priority: e.target.value })}
             >
-              Priority
-            </button>
-            <ul className="dropdown-menu">
-              <li>
-                <a className="dropdown-item" href="#">
-                  Action
-                </a>
-              </li>
-              <li>
-                <a className="dropdown-item" href="#">
-                  Another action
-                </a>
-              </li>
-              <li>
-                <a className="dropdown-item" href="#">
-                  Something else here
-                </a>
-              </li>
+              <option value="1">P1</option>
+              <option value="2">P2</option>
+              <option value="3">P3</option>
+            </select>
 
-              <li>
-                <a className="dropdown-item" href="#">
-                  Separated link
-                </a>
-              </li>
-            </ul>
-
-            <button className="btn btn-dark" type="button" id="button-addon2">
+            <button className="btn btn-dark" type="submit" id="button-addon2">
               Add
             </button>
           </div>
